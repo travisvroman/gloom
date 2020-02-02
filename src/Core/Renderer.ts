@@ -1,4 +1,4 @@
-import { WebGLRenderer, WebGLRendererParameters, Color } from "three";
+import { WebGLRenderer, WebGLRendererParameters, Color, Scene, Camera } from "three";
 
 export class Renderer {
 
@@ -15,6 +15,10 @@ export class Renderer {
 
     public Update( dt: number ): void {
         this._internal.clear();
+    }
+
+    public Render( dt: number, scene: Scene, camera: Camera ): void {
+        this._internal.render( scene, camera );
     }
 
     public OnResize( width: number, height: number ): void {

@@ -6,17 +6,17 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "node build.js",
-    "server": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js"
+    "server": "node ./node_modules/live-server/live-server.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "child-process": "^1.0.2",
     "fs-extra": "^8.1.0",
+    "live-server": "^1.2.1",
     "typescript": "^3.7.4",
     "webpack": "^4.41.5",
-    "webpack-cli": "^3.3.10",
-    "webpack-dev-server": "^3.10.1"
+    "webpack-cli": "^3.3.10"
   },
   "dependencies": {
     "@flyover/box2d": "^1.0.1",
