@@ -5,9 +5,8 @@ GLOOM is a WebGL-powered, old-school first-person-shooter style game inspired by
 This game is being developed in entirety as part of my HTML5 First Person Shooter YouTube Series here: https://www.youtube.com/watch?v=PMvQQlx1L5w&list=PLv8Ddw9K0JPgdB1nl41SpcssTKskP2D5C
 
 ## The plan:
-- Engine core (game loop, camera, scene)
+- Engine core (camera, scene)
 - Adding some utilities, rendering some geometry
-- Improved Build system
 - Keyboard input
 - Game, InputHandler
 - Level system (loading, creating sectors, "lighting", etc.)
@@ -73,3 +72,5 @@ This game is being developed in entirety as part of my HTML5 First Person Shoote
 
 ## Done So far:
 - Project bootstrapping
+- Improved Build system
+- Engine core (game loop)
