@@ -1,6 +1,6 @@
 import { Renderer } from "./Renderer";
-import * as Box2D from "@flyover/box2d"
-import { PerspectiveCamera, Scene, PlaneGeometry, MeshBasicMaterial, Color, Mesh } from "three";
+import { InputManager } from "./InputManager";
+import { Game } from "../Game";
 
 export class Engine {
 
@@ -10,22 +10,20 @@ export class Engine {
     private _aspect: number;
     private _gameTime: number = 0;
 
-    private _physicsWorld: Box2D.b2World;
-
-    // TODO: move these
-    private _camera: PerspectiveCamera;
-    private _scene: Scene;
+    private _game: Game;
 
     public constructor( canvas: HTMLCanvasElement, gameArea: HTMLDivElement ) {
         this._viewport = canvas;
         this._gameArea = gameArea;
         this._renderer = new Renderer( canvas );
-        this._physicsWorld = new Box2D.b2World( new Box2D.b2Vec2( 0, 0 ) );
+        this._game = new Game();
     }
 
     public Start( width: number, height: number ): void {
 
         console.log( "Started!" );
+
+        InputManager.Initialize( this._viewport );
 
         // Set canvas to specified physical size
         this._viewport.width = width;
@@ -46,24 +44,18 @@ export class Engine {
         // Call the resize routine manually once to set everything correctly.
         this.onWindowResize();
 
-        // TODO: move this
-        this._camera = new PerspectiveCamera( 45, this._aspect, 0.1, 1000 );
-        this._camera.position.set( 0, 0, 2 );
-
-        this._scene = new Scene();
-        // Test geometry
-        let geometry = new PlaneGeometry( 1, 1, 1, 1 );
-        let material = new MeshBasicMaterial( { color: new Color( "#FF6600" ) } );
-        let mesh = new Mesh( geometry, material );
-        this._scene.add( mesh );
+        this._game.OnStartup( this._aspect );
+        // TODO: temp
+        this._game.StartNew();
 
         // Kick off loop.
         this.loop( 0 );
     }
 
     private update( dt: number ): void {
+        this._game.Update( dt );
         this._renderer.Update( dt );
-        this._renderer.Render( dt, this._scene, this._camera );
+        this._renderer.Render( dt, this._game.ActiveScene, this._game.ActiveCamera );
     }
 
     private loop( gameTime: number ): void {
