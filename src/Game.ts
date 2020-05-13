@@ -1,17 +1,21 @@
-import { PerspectiveCamera, Scene, PlaneGeometry, MeshBasicMaterial, Color, Mesh, Camera } from "three";
+import { PerspectiveCamera, Scene, PlaneGeometry, MeshBasicMaterial, Color, Mesh, Camera, Vector2 } from "three";
 import { Message } from "./Message";
 import { InputEventMessage } from "./Core/InputEventMessage";
 import { IMessageHandler } from "./IMessageHandler";
-import * as Box2D from "@flyover/box2d"
 import { InputManager } from "./Core/InputManager";
+import { TMath } from "./Core/TMath";
+import { Level } from "./Level";
 
 export class Game implements IMessageHandler {
 
-    // TODO: move these
     private _camera: PerspectiveCamera;
-    private _scene: Scene;
+    private _level: Level;
 
-    private _physicsWorld: Box2D.b2World;
+    // TODO: move these
+    private _angle: number = 0;
+    private _movementSpeed: number = 5;
+
+
 
     public constructor() {
 
@@ -21,8 +25,8 @@ export class Game implements IMessageHandler {
         return this._camera;
     }
 
-    public get ActiveScene(): Scene {
-        return this._scene;
+    public get ActiveLevel(): Level {
+        return this._level;
     }
 
     public OnStartup( aspect: number ): void {
@@ -34,26 +38,87 @@ export class Game implements IMessageHandler {
     }
 
     public StartNew(): void {
-        this._scene = new Scene();
-        // Test geometry
-        let geometry = new PlaneGeometry( 1, 1, 1, 1 );
-        let material = new MeshBasicMaterial( { color: new Color( "#FF6600" ) } );
-        let mesh = new Mesh( geometry, material );
-        this._scene.add( mesh );
-
-        this._physicsWorld = new Box2D.b2World( new Box2D.b2Vec2( 0, 0 ) );
+        this._level = new Level();
+        this._level.Load();
     }
 
     public Update( dt: number ): void {
+        let movingForward: boolean;
+        let movingBackward: boolean;
+        let movingLeft: boolean;
+        let movingRight: boolean;
+        let turningLeft: boolean;
+        let turningRight: boolean;
+
+        movingForward = movingBackward = movingLeft = movingRight = turningLeft = turningRight = false;
+
         // W
         if ( InputManager.IsKeyDown( 87 ) ) {
-            this._camera.position.z -= 5 * dt;
+            movingForward = true;
         }
 
         // S
         if ( InputManager.IsKeyDown( 83 ) ) {
-            this._camera.position.z += 5 * dt;
+            movingBackward = true;
         }
+
+        // A
+        if ( InputManager.IsKeyDown( 65 ) ) {
+            movingLeft = true;
+        }
+
+        // D
+        if ( InputManager.IsKeyDown( 68 ) ) {
+            movingRight = true;
+        }
+
+        // Q
+        if ( InputManager.IsKeyDown( 81 ) ) {
+            turningLeft = true;
+        }
+
+        // E
+        if ( InputManager.IsKeyDown( 69 ) ) {
+            turningRight = true;
+        }
+
+        let velocity = new Vector2();
+        if ( movingForward ) {
+            velocity.x = -Math.sin( this._angle );
+            velocity.y = -Math.cos( this._angle );
+        }
+
+        if ( movingBackward ) {
+            velocity.x = Math.sin( this._angle );
+            velocity.y = Math.cos( this._angle );
+        }
+
+        if ( movingLeft ) {
+            velocity.x += Math.sin( this._angle - TMath.DegToRad( 90 ) );
+            velocity.y += Math.cos( this._angle - TMath.DegToRad( 90 ) );
+        }
+
+        if ( movingRight ) {
+            velocity.x += Math.sin( this._angle + TMath.DegToRad( 90 ) );
+            velocity.y += Math.cos( this._angle + TMath.DegToRad( 90 ) );
+        }
+
+        velocity = velocity.normalize();
+        velocity.x *= this._movementSpeed * dt;
+        velocity.y *= this._movementSpeed * dt;
+
+        this._camera.position.x += velocity.x;
+        this._camera.position.z += velocity.y;
+
+        if ( turningLeft ) {
+            this._angle += 1.5 * dt;
+        }
+
+        if ( turningRight ) {
+            this._angle -= 1.5 * dt;
+        }
+
+        this._camera.rotation.y = this._angle;
     }
 
     public LoadExisting(): void {

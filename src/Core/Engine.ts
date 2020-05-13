@@ -55,7 +55,7 @@ export class Engine {
     private update( dt: number ): void {
         this._game.Update( dt );
         this._renderer.Update( dt );
-        this._renderer.Render( dt, this._game.ActiveScene, this._game.ActiveCamera );
+        this._renderer.Render( dt, this._game.ActiveLevel, this._game.ActiveCamera );
     }
 
     private loop( gameTime: number ): void {

@@ -1,4 +1,5 @@
 import { WebGLRenderer, WebGLRendererParameters, Color, Scene, Camera } from "three";
+import { Level } from "../Level";
 
 export class Renderer {
 
@@ -17,8 +18,8 @@ export class Renderer {
         this._internal.clear();
     }
 
-    public Render( dt: number, scene: Scene, camera: Camera ): void {
-        this._internal.render( scene, camera );
+    public Render( dt: number, level: Level, camera: Camera ): void {
+        this._internal.render( level.InternalScene, camera );
     }
 
     public OnResize( width: number, height: number ): void {
