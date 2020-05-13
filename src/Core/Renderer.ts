@@ -1,5 +1,5 @@
 import { WebGLRenderer, WebGLRendererParameters, Color, Scene, Camera } from "three";
-import { Level } from "../Level";
+import { Level } from "../Level/Level";
 
 export class Renderer {
 

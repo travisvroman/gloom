@@ -1,6 +1,7 @@
 import { Renderer } from "./Renderer";
 import { InputManager } from "./InputManager";
 import { Game } from "../Game";
+import { Utilities } from "./Utilities";
 
 export class Engine {
 
@@ -55,7 +56,9 @@ export class Engine {
     private update( dt: number ): void {
         this._game.Update( dt );
         this._renderer.Update( dt );
-        this._renderer.Render( dt, this._game.ActiveLevel, this._game.ActiveCamera );
+        if ( Utilities.Exists( this._game.ActiveLevel ) && this._game.ActiveLevel.IsLoaded ) {
+            this._renderer.Render( dt, this._game.ActiveLevel, this._game.ActiveCamera );
+        }
     }
 
     private loop( gameTime: number ): void {
