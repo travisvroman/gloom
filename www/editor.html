@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>FPS Editor</title>
+    <link rel="stylesheet" type="text/css" href="style/editor.css" />
+    <script type="text/javascript">
+        // Prevents annoying onload from box2d.
+        if (window.module === undefined) {
+            window.module = {};
+        }
+    </script>
+    <script src="lib/box2d.js"></script>
+</head>
+
+<body>
+    <script src="index.js"></script>
+    <div id="initialControls">
+        <input id="mapNewControl" type="button" value="New Map..." onclick="editor.NewMapFile(event);" />
+        <input id="mapOpenControl" type="file" value="Open Map file..." onchange="editor.OpenMapFile(event);"
+            class="custom-file-input" />
+        <input id="mapSaveControl" type="button" value="Save..." onclick="editor.SaveMapFile();"
+            style="display: none;" />
+    </div>
+    <div id="workArea">
+        <div id="gridAreaWrapper">
+            <div id="gridArea">
+
+            </div>
+        </div>
+        <canvas class="canvasLayer" id="floorLayer"></canvas>
+        <canvas class="canvasLayer" id="wallLayer"></canvas>
+        <canvas class="canvasLayer" id="ceilingLayer"></canvas>
+        <canvas class="canvasLayer" id="lightLayer"></canvas>
+        <canvas class="canvasLayer" id="entityLayer"></canvas>
+        <canvas class="canvasLayer" id="collisionLayer"></canvas>
+    </div>
+    <sel/select id="toolPanel">
+        <h2>Map Properties</h2>
+        Name:&nbsp;<input id="levelNameTextbox" type="text" /><br />
+        <h3>Dimensions</h3>
+        W:&nbsp;<input id="widthTextbox" type="number" min="10" max="256" size="3" />&nbsp;
+        L:&nbsp;<input id="lengthTextbox" type="number" min="10" max="256" size="3" /><br />
+        <h3>Spawn Location</h3>
+        X:&nbsp;<input id="spawnXTextbox" type="number" min="0" max="256" size="3" onchange="editor.SpawnXChanged();" />&nbsp;
+        Y:&nbsp;<input id="spawnYTextbox" type="number" min="0" max="256" size="3" onchange="editor.SpawnYChanged();" />
+        <h2>Layer Visiblity</h2>
+        <input id="layerEntity" type="checkbox" checked="checked"
+            onchange="editor.EntityCheckChanged()" />&nbsp;Entities<br />
+        <input id="layerCol" type="checkbox" checked="checked"
+            onchange="editor.CollisionCheckChanged()" />&nbsp;Collision<br />
+        <input id="layerLight" type="checkbox" checked="checked"
+            onchange="editor.LightCheckChanged()" />&nbsp;Lights<br />
+        <input id="layerCeil" type="checkbox" checked="checked"
+            onchange="editor.CeilCheckChanged()" />&nbsp;Ceiling<br />
+        <input id="layerWall" type="checkbox" checked="checked" onchange="editor.WallCheckChanged()" />&nbsp;Walls<br />
+        <input id="layerFloor" type="checkbox" checked="checked"
+            onchange="editor.FloorCheckChanged()" />&nbsp;Floor<br />
+        <h2>Tools</h2>
+        <select id="activeLayer" onchange="editor.OnActiveLayerChanged();">
+            <option value="entity">Entities</option>
+            <option value="col">Collision</option>
+            <option value="light">Lights</option>
+            <option value="ceil">Ceiling</option>
+            <option value="wall">Walls</option>
+            <option value="floor" selected="selected">Floor</option>
+        </select>&nbsp;Active&nbsp;Layer<br />
+        <input type="radio" name="tool" value="Paint" checked="checked" />Paint<br />
+        <input type="radio" name="tool" value="Erase" />Erase<br />
+        <div id="textureSelectorWrapper">
+            <h3>Textures</h3>
+            <div id="textureSelector">
+                <input type="number" id="textureid" value="0" min="0" max="127"/>
+            </div>
+        </div>
+        <div id="colorSelector">
+            #<input id="lightColorBox" type="text" placeholder="Enter RRGGBB (no #)" size="6" />
+        </div>
+        <select id="collisionSelector">
+            <option value="0">None</option>
+            <option value="1">Open</option>
+            <option value="2">Wall</option>
+        </select>
+        </div>
+</body>
+
+</html>

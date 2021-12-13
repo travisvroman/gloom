@@ -1,13 +1,31 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>GLOOM</title>
-        <link rel="stylesheet" type="text/css" href="style/game.css" />
-        <script src="bundle.js"></script>
-    </head>
-    <body>
-        <div id="gameArea">
-            <canvas id="viewport"></canvas>
-        </div>
-    </body>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>FPS</title>
+    <link rel="stylesheet" type="text/css" href="style/game.css" />
+
+    <script type="text/javascript">
+        // Prevents annoying onload from box2d.
+        if (window.module === undefined) {
+            window.module = {};
+        }
+    </script>
+    <script src="lib/three.min.js"></script>
+    <script src="lib/BufferGeometryUtils.js"></script>
+    <script src="lib/stats.min.js"></script>
+    <script src="lib/box2d.js"></script>
+</head>
+
+<body>
+    <div id="gameArea">
+        <canvas id="viewport"></canvas>
+    </div>
+    <script src="index.js"></script>
+    <div class="tools">
+        <a href="editor.html">Editor</a>
+    </div>
+</body>
+
 </html>

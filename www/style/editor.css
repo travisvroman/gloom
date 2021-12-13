@@ -1,0 +1,178 @@
+html,
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 8pt;
+    color: #ddd;
+    background: #161616;
+}
+
+.grid-cell {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border: 1px solid rgba(255,255,255,0.25);
+    box-sizing: border-box;
+}
+
+.grid-cell:hover {
+    border:1px solid white;
+    box-sizing: border-box;
+    mix-blend-mode: difference;
+}
+
+#workArea {
+    overflow: scroll;
+    position: absolute;
+    left: 0;
+    top: 50px;
+    right: 200px;
+    bottom: 25px;
+    border: 1px solid black;
+    background: #222;
+}
+
+#toolPanel {
+    overflow: scroll;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    bottom: 25px;
+    border: 1px solid black;
+    background: #333;
+    width: 200px;
+}
+
+#gridArea {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+}
+
+#gridAreaWrapper {
+    position: absolute;
+    z-index: 998;
+}
+
+.canvasLayer {
+    position: absolute;
+}
+
+#floorLayer {
+    z-index: 1;
+}
+
+#wallLayer {
+    z-index: 2;
+}
+
+#ceilingLayer {
+    z-index: 3;
+}
+
+#lightLayer {
+    z-index: 4;
+}
+
+#collisionLayer {
+    z-index: 5;
+    opacity: 0.5;
+}
+
+#entityLayer {
+    z-index: 6;
+}
+
+.button {
+    border: 1px solid black;
+    background: #444;
+    color: white;
+}
+
+input[type=text],
+input[type=button],
+input[type=number] {
+    color: white;
+    display: inline-block;
+    background: #666;
+    border: 1px solid #333;
+    border-radius: 3px;
+    padding: 5px 8px;
+    outline: none;
+    white-space: nowrap;
+    text-shadow: 1px 1px #000;
+    font-size: 8pt;
+}
+
+input[type=number] {
+    width: 40px;
+}
+
+.custom-file-input {
+    color: transparent;
+    overflow: hidden;
+    width: 117px;
+    height: 28px;
+    display: inline-block;
+    float:left;
+}
+
+#initialCnotrols input[type=button] {
+    float:left;
+}
+
+.custom-file-input::-webkit-file-upload-button {
+    visibility: hidden;
+}
+
+.custom-file-input::before {
+    content: 'Open Map File...';
+    color: white;
+    display: inline-block;
+    background: #666;
+    border: 1px solid #333;
+    border-radius: 3px;
+    padding: 5px 8px;
+    outline: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    cursor: pointer;
+    text-shadow: 1px 1px #000;
+    font-size: 8pt;
+}
+
+.custom-file-input:hover::before {
+    border-color: black;
+}
+
+.custom-file-input:active {
+    outline: 0;
+}
+
+.custom-file-input:active::before {
+    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    padding: 0;
+}
+
+::-webkit-scrollbar {
+    width: 1em;
+}
+ 
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+ 
+::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}

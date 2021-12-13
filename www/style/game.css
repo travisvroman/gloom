@@ -19,3 +19,26 @@ canvas {
     left: 50%;
     top: 50%;
 }
+
+.tools {
+    background: rgba(0, 0, 0, 0.85);
+    color: white;
+    font-family: Arial, sans-serif;
+    width: 50px;
+    height: 25px;
+    border-radius: 5px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    padding:5px;
+}
+
+a, a:visited { color: #ff6600; }
+
+#uiCanvas {
+    position: absolute;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+}

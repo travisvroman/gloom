@@ -1,0 +1,60 @@
+{
+    "sfx": [
+        {
+            "name": "dryfire",
+            "autoPlay": false,
+            "sources": [
+                "assets/audio/dryfire.mp3",
+                "assets/audio/dryfire.wav"
+            ]
+        },
+        {
+            "name": "pistolFire",
+            "autoPlay": false,
+            "sources": [
+                "assets/audio/pistol.ogg",
+                "assets/audio/pistol.mp3",
+                "assets/audio/pistol.wav"
+            ]
+        },
+        {
+            "name": "shotgunFire",
+            "autoPlay": false,
+            "sources": [
+                "assets/audio/shotgun.ogg",
+                "assets/audio/shotgun.mp3",
+                "assets/audio/shotgun.wav"
+            ]
+        },
+        {
+            "name": "shotgunReload",
+            "autoPlay": false,
+            "sources": [
+                "assets/audio/shotgun_reload.ogg",
+                "assets/audio/shotgun_reload.mp3",
+                "assets/audio/shotgun_reload.wav"
+            ]
+        },
+        {
+            "name": "doorOpen",
+            "autoPlay": false,
+            "sources": [
+                "assets/audio/doorOpen.ogg",
+                "assets/audio/doorOpen.mp3",
+                "assets/audio/doorOpen.wav"
+            ]
+        },
+        {
+            "name": "pickup",
+            "autoPlay": false,
+            "sources": [
+                "assets/audio/pickup.ogg",
+                "assets/audio/pickup.mp3",
+                "assets/audio/pickup.wav"
+            ]
+        }
+    ],
+    "music": [
+
+    ]
+}
